@@ -265,7 +265,7 @@ let
   extraBuildInputs = extraPackages python3Packages;
 
   # Don't forget to run update-component-packages.py after updating
-  hassVersion = "2026.6.0";
+  hassVersion = "2026.6.3";
 
 in
 python3Packages.buildPythonApplication rec {
@@ -286,13 +286,13 @@ python3Packages.buildPythonApplication rec {
     owner = "home-assistant";
     repo = "core";
     tag = version;
-    hash = "sha256-/7WBiQwr40EFOwL+J/3L4pBoQp7nNPPjcKHxU4tDNcU=";
+    hash = "sha256-I9vmwlCoxEK3o04e1x5LissX3u0fgxVOu6Uzq88e9kI=";
   };
 
   # Secondary source is pypi sdist for translations
   sdist = fetchPypi {
     inherit pname version;
-    hash = "sha256-Eu5oUGBKCrIZkyyLfmTJbHxOC7TD9QHjjNpjscgPK/I=";
+    hash = "sha256-23tqASXXrhYh1x7Qy+ZR4T7z+XKkhW0Qn6YGM2iNJOk=";
   };
 
   build-system = with python3Packages; [
@@ -316,6 +316,9 @@ python3Packages.buildPythonApplication rec {
 
     # No scaring our users about not running in a docker or a venv
     ./patches/pythonpath-is-a-venv.patch
+
+    # No scaring our users about our install method
+    ./patches/nixos-was-never-supported.patch
 
     # Patch path to ffmpeg binary
     (replaceVars ./patches/ffmpeg-path.patch {
