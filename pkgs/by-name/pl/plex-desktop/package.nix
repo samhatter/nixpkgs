@@ -33,6 +33,7 @@
   libxinerama,
   libxdamage,
   libxcomposite,
+  libxcursor,
   xrandr,
   libxshmfence,
 }:
@@ -156,6 +157,7 @@ buildFHSEnv {
     alsa-lib
     intel-gmmlib
     libdrm
+    libxcursor
     xkeyboard_config
   ];
 
